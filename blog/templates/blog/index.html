@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    {% for post in posts %}
+        <div>
+            <p>published date : {{ post.published_date }}</p>
+            <p>작성자 : {{ post.author.username }}</p>
+            <h4><a href="post/{{post.id}}">{{ post.title }}</a></h4>
+        </div>
+        <hr>
+    {% endfor %}
+{% endblock %}
