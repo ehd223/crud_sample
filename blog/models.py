@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.urls import reverse
 
 # Create your models here.
 
@@ -18,3 +19,12 @@ class Post(models.Model):
 
   def get_absolute_url(self):
       return reverse("blog:post_detail", kwargs={"post_id": self.pk})
+
+class Comment(models.Model):
+  post = models.ForeignKey('blog.Post', related_name='comments')
+  nickname = models.CharField(max_length=200)
+  text = models.TextField()
+  created_date = models.DateTimeField(default=timezone.now)
+
+  def __str__(self):
+    return self.text

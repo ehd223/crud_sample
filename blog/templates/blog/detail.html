@@ -1,13 +1,43 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-  <div>
+  <div class="post-detail">
     <p>발행일 : {{ post.published_date }}</p>
-    <a href="{% url 'blog:post_edit' post_id=post.id %}">수정</a>
-    <a href="{% url 'blog:post_delete' post_id=post.id %}" onclick="return confirm('진짜루 삭제?')">삭제</a>
-    <h3>{{ post.title }}</h3>
-    <p>{{ post.text }}</p>
+    <div class="btn-group btn-group-sm float-right" role="group">
+      <a href="{% url 'blog:post_edit' post_id=post.id %}" class="btn btn-secondary">수정</a>
+      <a href="{% url 'blog:post_delete' post_id=post.id %}" class="btn btn-secondary" onclick="return confirm('진짜루 삭제?')">삭제</a>
+    </div>
+    <h3 class="post-title">{{ post.title }}</h3><hr>
+    <p class="post-text">{{ post.text|linebreaks }}</p>
   </div>
 
   <a href="/blog/">뒤로가기</a>
+
+  <hr>
+  <p>댓글 {{ post.comments.count }}개</p>
+  <div class="comments">
+    {% for comment in post.comments.all %}
+      <div>
+        <div class="float-right">{{ comment.created_date }}</div>
+        <strong>{{ comment.nickname }}</strong>
+        <p>{{ comment.text|linebreaks }}</p>
+        <div class="btn-group btn-group-sm" role="group">
+          <a href="{% url 'blog:comment_delete' comment_id=comment.id %}" class="btn btn-secondary">삭제</a>
+        </div>
+        <hr>
+      </div>
+    {% empty %}
+        <p>아직 아무 댓글이 없어요 :(</p>
+    {% endfor %}<br>
+    <div class="form-group card">
+      <h6 class="card-header">댓글 쓰기</h6>
+      <div class="card-body">
+        <form method="POST" action="{% url 'blog:add_comment_to_post' post_id=post.id %}">{% csrf_token %}
+            {{ comment_form.as_p }}
+            <button type="submit" class="save btn btn-secondary btn-sm">작성</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
 {% endblock %}

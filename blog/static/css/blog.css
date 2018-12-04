@@ -1,0 +1,14 @@
+.content {
+  margin: 50px;
+  padding-left: 50px;
+}
+
+.header{
+  background-color: #ee9f55;
+  padding: 30px;
+}
+
+div.comments{
+  padding: 30px;
+  background-color: #f2f2ea;
+}
