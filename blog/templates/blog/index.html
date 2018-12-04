@@ -5,7 +5,7 @@
         <div>
             <p>published date : {{ post.published_date }}</p>
             <p>작성자 : {{ post.author.username }}</p>
-            <h4><a href="post/{{post.id}}">{{ post.title }}</a></h4>
+            <h4><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h4>
         </div>
         <hr>
     {% endfor %}

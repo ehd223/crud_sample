@@ -9,5 +9,6 @@ urlpatterns = [
     url(r'^post/new/$', views.post_new, name="post_new"),
     # localhost:8000/blog/post/new
     url(r'^post/(?P<post_id>\d+)/edit/$', views.post_edit, name="post_edit"),
+    url(r'^post/(?P<post_id>\d+)/delete/$', views.post_delete, name="post_delete"),
 ]
 
