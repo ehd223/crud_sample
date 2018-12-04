@@ -3,7 +3,6 @@ from django.http import HttpResponse
 import datetime
 from .models import Post
 from .forms import PostForm
-from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -26,8 +25,6 @@ def post_new(request):
     form = PostForm(request.POST)
     if form.is_valid():
       post = form.save(commit=False)
-      # post.author = request.user
-      post.author = User.objects.get(username="admin")
       post.published_date = datetime.datetime.now()
       post.save()
       return redirect(post)
