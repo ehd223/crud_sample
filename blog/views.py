@@ -17,9 +17,12 @@ def index(request):
 def detail(request, post_id):
   post = get_object_or_404(Post, id = post_id)
   comment_form = CommentForm()
+  words = post.text.split()
+  
   return render(request, 'blog/detail.html', {
     'post':post,
     'comment_form':comment_form,
+    'number_of_words':len(words),
     })
 
 def post_new(request):

@@ -4,11 +4,13 @@
   <div class="post-detail">
     <p>발행일 : {{ post.published_date }}</p>
     <div class="btn-group btn-group-sm float-right" role="group">
-      <a href="{% url 'blog:post_edit' post_id=post.id %}" class="btn btn-secondary">수정</a>
-      <a href="{% url 'blog:post_delete' post_id=post.id %}" class="btn btn-secondary" onclick="return confirm('진짜루 삭제?')">삭제</a>
+        <a href="{% url 'blog:post_edit' post_id=post.id %}" class="btn btn-secondary">수정</a>
+        <a href="{% url 'blog:post_delete' post_id=post.id %}" class="btn btn-secondary" onclick="return confirm('진짜루 삭제?')">삭제</a>
     </div>
     <h3 class="post-title">{{ post.title }}</h3><hr>
     <p class="post-text">{{ post.text|linebreaks }}</p>
+    <br>
+    <p>단어 수 : {{ number_of_words }}</p>
   </div>
 
   <a href="/blog/">뒤로가기</a>

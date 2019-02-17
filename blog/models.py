@@ -18,10 +18,10 @@ class Post(models.Model):
     self.save()
 
   def get_absolute_url(self):
-      return reverse("blog:post_detail", kwargs={"post_id": self.pk})
+    return reverse("blog:post_detail", kwargs={"post_id": self.pk})
 
 class Comment(models.Model):
-  post = models.ForeignKey('blog.Post', related_name='comments')
+  post = models.ForeignKey('blog.Post', related_name='comments', on_delete=models.CASCADE)
   nickname = models.CharField(max_length=200)
   text = models.TextField()
   created_date = models.DateTimeField(default=timezone.now)
