@@ -1,1 +1,1 @@
-web: gunicorn myyy.wsgi
+web: gunicorn myyy.wsgi --log-file -
